@@ -38,6 +38,10 @@ class _HomeState extends State<Home> {
       widthFractionWithRespectToDeviceWidth: 3,
       displayBelowWidget: true,
       triangleDirection: TriangleDirection.FullLeft,
+      popupElevation: 10,
+
+      ///you can also add border radius
+      ////popupBorderRadius:,
       item: CustomPointedPopupItem(
         title: 'Popup that can be shown on any targeted widget with customized pointed design.',
         textStyle: Theme.of(context).textTheme.caption!.copyWith(
@@ -47,6 +51,9 @@ class _HomeState extends State<Home> {
           Icons.add_moderator,
           color: Theme.of(context).cardColor,
         ),
+
+        ///Or you can add custom item widget below instead above 3
+        ///itemWidget: Container(),
       ),
       onClickWidget: (onClickMenu) {
         print('popup item clicked');
@@ -71,7 +78,7 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'CPP with straight pointer and item.',
+                'CPP with straight pointer & item.',
                 style: TextStyle(
                   color: Colors.red,
                   fontSize: 14.0,
