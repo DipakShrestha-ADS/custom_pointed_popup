@@ -97,7 +97,6 @@ class CustomPointedPopup {
     VoidCallback? onDismiss,
     int? widthFractionWithRespectToDeviceWidth,
     Color? backgroundColor,
-    Color? lineColor,
     CustomPopupStateChanged? stateChanged,
     required CustomPointedPopupItem item,
     this.displayBelowWidget = false,
@@ -110,7 +109,7 @@ class CustomPointedPopup {
     this.stateChanged = stateChanged;
     this.item = item;
     this._widthFractionWithRespectToDeviceWidth = widthFractionWithRespectToDeviceWidth ?? 3;
-    this._backgroundColor = backgroundColor ?? Color(0xff232323);
+    this._backgroundColor = backgroundColor ?? Colors.red;
     CustomPointedPopup.context = context;
   }
 

@@ -34,7 +34,6 @@ class _HomeState extends State<Home> {
     return CustomPointedPopup(
       backgroundColor: Colors.red,
       context: context,
-      lineColor: Colors.tealAccent,
       widthFractionWithRespectToDeviceWidth: 3,
       displayBelowWidget: true,
       triangleDirection: TriangleDirection.FullLeft,
