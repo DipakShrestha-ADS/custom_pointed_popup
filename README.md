@@ -113,6 +113,7 @@ Popup that can be shown on any targeted widget with customized pointed design.
 
 ## Important Class, Function And Enum
 The important `class` to know. `CustomPointedPopupItem` - Model item to display inside the pointed popup:
+
 | Attribute | Type  | Default | Required | Description |
 |-----------|-------|---------|-------------|----------|
 | `iconWidget` | `Widget` |  | `No` | This will create an icon inside the pointed popup. |
@@ -122,6 +123,7 @@ The important `class` to know. `CustomPointedPopupItem` - Model item to display 
 | `itemWidget` | `Widget` |  | `No` | Custom item widget or child for the pointed popup. No need to add `iconWidget` & `title` if you added this.|
 
 The important function to know. `show` - Function to show the custom pointed popup:
+
 | Attribute | Type  | Default | Required | Description |
 |-----------|-------|---------|-------------|----------|
 | `rect` | `Rect` |  | `No` | The rect bound that the popup should appear around it. |
@@ -129,6 +131,7 @@ The important function to know. `show` - Function to show the custom pointed pop
 | `item` | `CustomPointedPopupItem [class]` |  | `No` | If you want the dynamic item widget or child inside the popup per action, you can add the item here. |
 
 The important `enum` to know. `TriangleDirection` - Enum to choose the direction of pointer or triangle shape:
+
 | Value | Description |
 |-----------|----------|
 | `Straight` | This will create an pointer with straight upward. |
@@ -139,6 +142,7 @@ The important `enum` to know. `TriangleDirection` - Enum to choose the direction
 
 
 In order to create a custom pointed popup on the widget, there are several attributes that are supported by `custom_pointed_popup`:
+
 | Attribute | Type  | Default | Required | Description |
 |-----------|-------|---------|-------------|----------|
 | `item` | `CustomPointedPopupItem [class]` |  | `Yes` | To create the item widget or child in pointed popup. |
