@@ -126,6 +126,7 @@ The important function to know. `show` - Function to show the custom pointed pop
 |-----------|-------|---------|-------------|----------|
 | `rect` | `Rect` |  | `No` | The rect bound that the popup should appear around it. |
 | `widgetKey` | `GlobalKey` |  | `No` | The key to widget. |
+| `item` | `CustomPointedPopupItem [class]` |  | `No` | If you want the dynamic item widget or child inside the popup per action, you can add the item here. |
 
 The important `enum` to know. `TriangleDirection` - Enum to choose the direction of pointer or triangle shape:
 | Value | Description |
