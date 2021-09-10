@@ -5,3 +5,7 @@
 ## 0.0.2 - 2021-07-18
 
 * Documentation added.
+
+## 0.0.3 - 2021-07-18
+
+* Readme updated.
