@@ -84,6 +84,7 @@ class CustomPointedPopup {
 
   ///always displayed popup below the widget.
   bool displayBelowWidget;
+  double? customHeight;
 
   TriangleDirection? triangleDirection;
 
@@ -103,6 +104,7 @@ class CustomPointedPopup {
     this.triangleDirection,
     this.popupBorderRadius,
     this.popupElevation,
+    this.customHeight,
   }) {
     this.onClickItemWidget = onClickWidget;
     this.dismissCallback = onDismiss;
@@ -162,7 +164,7 @@ class CustomPointedPopup {
       if (tempDx > 10) dx = tempDx;
     }
 
-    double dy = _showRect.top - popupHeight();
+    double dy = _showRect.top - (customHeight ?? popupHeight());
 
     if (displayBelowWidget) {
       dy = arrowHeight + _showRect.height + _showRect.top;
@@ -208,7 +210,7 @@ class CustomPointedPopup {
               // Triangle arrow paint
               Positioned(
                 left: _showRect.left + _showRect.width / 2.0 - 7.5,
-                top: _isTriangleDown ? offset.dy + popupHeight() : (offset.dy - arrowHeight),
+                top: _isTriangleDown ? offset.dy + (customHeight ?? popupHeight()) : (offset.dy - arrowHeight),
                 child: CustomPaint(
                   size: Size(15.0, arrowHeight),
                   painter: TrianglePainter(
@@ -230,14 +232,14 @@ class CustomPointedPopup {
                   ),
                   child: Container(
                     width: popupWidth(),
-                    height: displayBelowWidget ? null : popupHeight(),
+                    height: displayBelowWidget ? customHeight : (customHeight ?? popupHeight()),
                     child: Column(
                       children: <Widget>[
                         ClipRRect(
                           borderRadius: popupBorderRadius ?? BorderRadius.circular(10.0),
                           child: Container(
                             width: popupWidth(),
-                            height: displayBelowWidget ? null : popupHeight(),
+                            height: displayBelowWidget ? customHeight : (customHeight ?? popupHeight()),
                             padding: EdgeInsets.all(5.0),
                             decoration: BoxDecoration(
                               color: _backgroundColor,

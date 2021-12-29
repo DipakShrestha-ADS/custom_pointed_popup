@@ -35,9 +35,10 @@ class _HomeState extends State<Home> {
       backgroundColor: Colors.red,
       context: context,
       widthFractionWithRespectToDeviceWidth: 3,
-      displayBelowWidget: true,
-      triangleDirection: TriangleDirection.FullLeft,
+      triangleDirection: TriangleDirection.Straight,
       popupElevation: 10,
+      displayBelowWidget: false,
+      // customHeight: 150,
 
       ///you can also add border radius
       ////popupBorderRadius:,
@@ -52,7 +53,11 @@ class _HomeState extends State<Home> {
         ),
 
         ///Or you can add custom item widget below instead above 3
-        ///itemWidget: Container(),
+        // itemWidget: Container(
+        //   child: Center(
+        //     child: Text('CUstome item'),
+        //   ),
+        // ),
       ),
       onClickWidget: (onClickMenu) {
         print('popup item clicked');

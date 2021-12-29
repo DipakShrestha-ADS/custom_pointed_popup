@@ -146,6 +146,7 @@ In order to create a custom pointed popup on the widget, there are several attri
 | Attribute | Type  | Default | Required | Description |
 |-----------|-------|---------|-------------|----------|
 | `item` | `CustomPointedPopupItem [class]` |  | `Yes` | To create the item widget or child in pointed popup. |
+| `customHeight` | `double` |  | `Yes` | The custom height of the pointed popup. |
 | `displayBelowWidget` | `bool` | `false`  | `No` | If true always display the popup below the widget else automatically calculate the space and display the popup either up or below the widget. |
 | `triangleDirection` | `TriangleDirection [enum]` | `TraingleDirection.Straight` | `No` | Determines the direction of pointer or triangle shape. |
 | `popupBorderRadius` | `BorderRadius` | `BorderRadius.circular(10.0)` | `No` | Defines the border of the custom pointed popup. |
