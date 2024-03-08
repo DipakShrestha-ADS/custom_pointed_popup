@@ -5,8 +5,7 @@ author: Dipak Shrestha <dipak.shrestha@eemc.edu.np>
 homepage: https://github.com/DipakShrestha-ADS/custom_pointed_popup
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
-  flutter: ">=1.17.0"
+  sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
   flutter:

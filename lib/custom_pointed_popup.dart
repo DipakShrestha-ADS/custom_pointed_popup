@@ -6,6 +6,8 @@ import 'dart:ui';
 import 'package:custom_pointed_popup/utils/triangle_painter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 
 ///Custom Pointed Popup Item
 class CustomPointedPopupItem {
@@ -13,6 +15,8 @@ class CustomPointedPopupItem {
   String? title;
   TextStyle? textStyle;
   TextAlign? textAlign;
+  MainAxisAlignment? mainAxisAlignment;
+  CrossAxisAlignment? crossAxisAlignment;
 
   ///Adding this would replace the popup default item to item widget.
   Widget? itemWidget;
@@ -23,6 +27,8 @@ class CustomPointedPopupItem {
     this.textStyle,
     this.textAlign,
     this.itemWidget,
+    this.mainAxisAlignment,
+    this.crossAxisAlignment,
   }) : assert(title != null || itemWidget != null);
 
   Widget? get getIconWidget => iconWidget;
@@ -31,7 +37,8 @@ class CustomPointedPopupItem {
 
   String? get getTitle => title;
 
-  TextStyle get getTextStyle => textStyle ?? TextStyle(color: Color(0xffc5c5c5), fontSize: 10.0);
+  TextStyle get getTextStyle =>
+      textStyle ?? TextStyle(color: Color(0xffc5c5c5), fontSize: 10.0);
 
   TextAlign get getTextAlign => textAlign ?? TextAlign.center;
 }
@@ -110,7 +117,8 @@ class CustomPointedPopup {
     this.dismissCallback = onDismiss;
     this.stateChanged = stateChanged;
     this.item = item;
-    this._widthFractionWithRespectToDeviceWidth = widthFractionWithRespectToDeviceWidth ?? 3;
+    this._widthFractionWithRespectToDeviceWidth =
+        widthFractionWithRespectToDeviceWidth ?? 3;
     this._backgroundColor = backgroundColor ?? Colors.red;
     CustomPointedPopup.context = context;
   }
@@ -134,7 +142,7 @@ class CustomPointedPopup {
       return buildPopupMenuLayout(_offset);
     });
 
-    Overlay.of(CustomPointedPopup.context)!.insert(_entry);
+    Overlay.of(CustomPointedPopup.context).insert(_entry);
     _isShow = true;
     if (this.stateChanged != null) {
       this.stateChanged!(true);
@@ -144,7 +152,8 @@ class CustomPointedPopup {
   static Rect getWidgetGlobalRect(GlobalKey key) {
     RenderBox renderBox = key.currentContext!.findRenderObject()! as RenderBox;
     var offset = renderBox.localToGlobal(Offset.zero);
-    return Rect.fromLTWH(offset.dx, offset.dy, renderBox.size.width, renderBox.size.height);
+    return Rect.fromLTWH(
+        offset.dx, offset.dy, renderBox.size.width, renderBox.size.height);
   }
 
   void _calculatePosition(BuildContext context) {
@@ -210,13 +219,17 @@ class CustomPointedPopup {
               // Triangle arrow paint
               Positioned(
                 left: _showRect.left + _showRect.width / 2.0 - 7.5,
-                top: _isTriangleDown ? offset.dy + (customHeight ?? popupHeight()) : (offset.dy - arrowHeight),
+                top: _isTriangleDown
+                    ? offset.dy + (customHeight ?? popupHeight())
+                    : (offset.dy - arrowHeight),
                 child: CustomPaint(
                   size: Size(15.0, arrowHeight),
                   painter: TrianglePainter(
                     isDown: _isTriangleDown,
                     color: _backgroundColor,
-                    triangleDirection: triangleDirection != null ? triangleDirection! : TriangleDirection.Straight,
+                    triangleDirection: triangleDirection != null
+                        ? triangleDirection!
+                        : TriangleDirection.Straight,
                   ),
                 ),
               ),
@@ -228,41 +241,55 @@ class CustomPointedPopup {
                   elevation: popupElevation ?? 0,
                   margin: EdgeInsets.zero,
                   shape: RoundedRectangleBorder(
-                    borderRadius: popupBorderRadius ?? BorderRadius.circular(10.0),
+                    borderRadius:
+                        popupBorderRadius ?? BorderRadius.circular(10.0),
                   ),
                   child: Container(
                     width: popupWidth(),
-                    height: displayBelowWidget ? customHeight : (customHeight ?? popupHeight()),
+                    height: displayBelowWidget
+                        ? customHeight
+                        : (customHeight ?? popupHeight()),
                     child: Column(
                       children: <Widget>[
                         ClipRRect(
-                          borderRadius: popupBorderRadius ?? BorderRadius.circular(10.0),
+                          borderRadius:
+                              popupBorderRadius ?? BorderRadius.circular(10.0),
                           child: Container(
                             width: popupWidth(),
-                            height: displayBelowWidget ? customHeight : (customHeight ?? popupHeight()),
+                            height: displayBelowWidget
+                                ? customHeight
+                                : (customHeight ?? popupHeight()),
                             padding: EdgeInsets.all(5.0),
                             decoration: BoxDecoration(
                               color: _backgroundColor,
-                              borderRadius: popupBorderRadius ?? BorderRadius.circular(10.0),
+                              borderRadius: popupBorderRadius ??
+                                  BorderRadius.circular(10.0),
                             ),
                             child: GestureDetector(
                               onTap: () {
                                 itemClicked(item);
                               },
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: item.itemWidget != null
-                                    ? [item.itemWidget!]
-                                    : [
+                              child: item.itemWidget != null
+                                  ? item.itemWidget!
+                                  : Column(
+                                      mainAxisAlignment:
+                                          item.mainAxisAlignment ??
+                                              MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          item.crossAxisAlignment ??
+                                              CrossAxisAlignment.center,
+                                      children: [
                                         item.getIconWidget!,
                                         Text(
                                           '${item.getTitle}',
                                           style: item.getTextStyle,
                                           textAlign: item.getTextAlign,
-                                          overflow: displayBelowWidget ? TextOverflow.clip : TextOverflow.ellipsis,
+                                          overflow: displayBelowWidget
+                                              ? TextOverflow.clip
+                                              : TextOverflow.ellipsis,
                                         ),
                                       ],
-                              ),
+                                    ),
                             ),
                           ),
                         ),
