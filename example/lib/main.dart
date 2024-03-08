@@ -43,7 +43,8 @@ class _HomeState extends State<Home> {
       ///you can also add border radius
       ////popupBorderRadius:,
       item: CustomPointedPopupItem(
-        title: 'Popup that can be shown on any targeted widget with customized pointed design.',
+        title:
+            'Popup that can be shown on any targeted widget with customized pointed design.',
         textStyle: Theme.of(context).textTheme.caption!.copyWith(
               color: Theme.of(context).cardColor,
             ),
@@ -51,6 +52,8 @@ class _HomeState extends State<Home> {
           Icons.add_moderator,
           color: Theme.of(context).cardColor,
         ),
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
 
         ///Or you can add custom item widget below instead above 3
         // itemWidget: Container(
