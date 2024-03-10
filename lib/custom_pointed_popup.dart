@@ -149,11 +149,71 @@ class CustomPointedPopup {
     }
   }
 
+  showAsync({
+    Rect? rect,
+    GlobalKey? widgetKey,
+    CustomPointedPopupItem? item,
+    int duration = 10,
+  }) async {
+    try {
+      assert(rect != null || widgetKey != null);
+      if (rect == null && widgetKey == null) {
+        throw ErrorWidget.withDetails(
+          message: 'Both Rect & Widget key can\'t be null.',
+        );
+      }
+
+      this.item = item ?? this.item;
+      this._showRect =
+          rect ?? CustomPointedPopup.getWidgetGlobalRect(widgetKey!);
+      this._screenSize = window.physicalSize / window.devicePixelRatio;
+      this.dismissCallback = dismissCallback;
+
+      _calculatePosition(CustomPointedPopup.context);
+
+      _entry = OverlayEntry(builder: (context) {
+        return buildPopupMenuLayout(_offset);
+      });
+
+      Overlay.of(CustomPointedPopup.context).insert(_entry);
+      _isShow = true;
+      if (this.stateChanged != null) {
+        this.stateChanged!(true);
+      }
+
+      await Future.any<void>([
+        // Wait for user interaction (e.g., tap outside)
+        // _waitForDismissal(),
+        // Timeout after 30 seconds (optional)
+        Future.delayed(
+          Duration(
+            seconds: duration,
+          ),
+        ),
+      ]);
+
+      _entry.remove();
+
+      _isShow = false;
+      if (this.stateChanged != null) {
+        this.stateChanged!(false);
+      }
+    } catch (e) {
+      debugPrint("Error during asynchronous show: $e");
+      await Future.delayed(Duration.zero);
+      throw e;
+    }
+  }
+
   static Rect getWidgetGlobalRect(GlobalKey key) {
     RenderBox renderBox = key.currentContext!.findRenderObject()! as RenderBox;
     var offset = renderBox.localToGlobal(Offset.zero);
     return Rect.fromLTWH(
-        offset.dx, offset.dy, renderBox.size.width, renderBox.size.height);
+      offset.dx,
+      offset.dy,
+      renderBox.size.width,
+      renderBox.size.height,
+    );
   }
 
   void _calculatePosition(BuildContext context) {
