@@ -123,7 +123,11 @@ class CustomPointedPopup {
     CustomPointedPopup.context = context;
   }
 
-  void show({Rect? rect, GlobalKey? widgetKey, CustomPointedPopupItem? item}) {
+  void show({
+    Rect? rect,
+    GlobalKey? widgetKey,
+    CustomPointedPopupItem? item,
+  }) {
     assert(rect != null || widgetKey != null);
     if (rect == null && widgetKey == null) {
       throw ErrorWidget.withDetails(
@@ -181,27 +185,28 @@ class CustomPointedPopup {
         this.stateChanged!(true);
       }
 
-      await Future.any<void>([
-        // Wait for user interaction (e.g., tap outside)
-        // _waitForDismissal(),
-        // Timeout after 30 seconds (optional)
-        Future.delayed(
-          Duration(
-            seconds: duration,
-          ),
-        ),
-      ]);
-
-      _entry.remove();
-
-      _isShow = false;
-      if (this.stateChanged != null) {
-        this.stateChanged!(false);
+      for (int i = 0; i <= duration; i++) {
+        if (isShow == false) {
+          return;
+        }
+        await Future.delayed(Duration(seconds: 1));
       }
+
+      dismiss();
+
+      // if (isShow == true) {
+      //   _entry.remove();
+      // }
+
+      // _isShow = false;
+      // if (this.stateChanged != null) {
+      //   this.stateChanged!(false);
+      // }
     } catch (e) {
-      debugPrint("Error during asynchronous show: $e");
+      // debugPrint("Error during asynchronous show: $e");
       await Future.delayed(Duration.zero);
-      throw e;
+      // throw e;
+      dismiss();
     }
   }
 
